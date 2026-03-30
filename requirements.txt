@@ -1,3 +1,4 @@
+
 fastapi
 uvicorn
 gunicorn
@@ -8,3 +9,4 @@ azure-storage-blob
 azure-core
 pydantic
 requests
+azure-identity
