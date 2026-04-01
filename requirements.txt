@@ -23,3 +23,4 @@ azure-identity
 python-multipart
 pydantic
 requests
+azure-cognitiveservices-vision-face
