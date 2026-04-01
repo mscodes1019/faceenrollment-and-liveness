@@ -408,13 +408,24 @@ async function enroll() {
   var username = String(state.userInfo.username || '').trim();
   var imageB64 = (typeof state.colorFrame === 'string') ? state.colorFrame : '';
 
+  // Extra validation and user guidance
   if (!username) {
     showErrorModal('Missing user details. Please go back and enter your name.');
     return;
   }
+  if (!state.consentGiven) {
+    showErrorModal('You must give consent before enrolling.');
+    return;
+  }
+  if (!imageB64 || !/^data:image\/(jpeg|png);base64,/.test(imageB64)) {
+    showErrorModal('No valid image was captured. Please try again.');
+    return;
+  }
 
-  if (!imageB64) {
-    showErrorModal('No image was captured. Please try again.');
+  // Warn if image is suspiciously small (could be a blank or failed capture)
+  var base64Data = imageB64.split(',')[1] || '';
+  if (base64Data.length < 10000) {
+    showErrorModal('The captured image seems too small. Please ensure your camera is working and try again.');
     return;
   }
 

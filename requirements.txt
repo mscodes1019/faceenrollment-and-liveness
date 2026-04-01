@@ -10,3 +10,4 @@ azure-core
 pydantic
 requests
 azure-identity
+python-multipart
